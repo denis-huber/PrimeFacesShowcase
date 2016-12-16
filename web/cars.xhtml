@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: Denis
+  Date: 12.12.2016
+  Time: 17:18
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+    <h:form>
+        <p:dataScroller value="#{dataScrollerView.cars}" var="car" chunkSize="10">
+            <f:facet name="header">
+                Scroll Down to Load More Cars
+            </f:facet>
+
+            <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail">
+                <p:graphicImage
+                        url="http://primefaces.org/showcase/javax.faces.resource/demo/images/car/#{car.brand}-big.gif.xhtml"/>
+
+                <p:outputPanel>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputText value="Id:"/>
+                        <h:outputText value="#{car.id}" style="font-weight: bold"/>
+
+                        <h:outputText value="Year:"/>
+                        <h:outputText value="#{car.year}" style="font-weight: bold"/>
+
+                        <h:outputText value="Color:"/>
+                        <h:outputText value="#{car.color}" style="font-weight: bold"/>
+                    </h:panelGrid>
+                </p:outputPanel>
+
+                <p:button value="Details" outcome="detailView">
+                    <f:param name="id" value="#{car.id}"/>
+                </p:button>
+
+            </h:panelGrid>
+        </p:dataScroller>
+    </h:form>
+
+</h:body>
+</html>

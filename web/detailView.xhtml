@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<f:metadata>
+    <f:viewParam name="id" value="#{detailView.id}"/>
+    <f:viewAction action="#{detailView.loadCar}"/>
+</f:metadata>
+
+<f:view>
+    <p:graphicImage
+            url="http://primefaces.org/showcase/javax.faces.resource/demo/images/car/#{detailView.car.brand}-big.gif.xhtml"/>
+    <p:outputPanel>
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:outputText value="Id:"/>
+            <h:outputText value="#{detailView.car.id}" style="font-weight: bold"/>
+
+            <h:outputText value="Year:"/>
+            <h:outputText value="#{detailView.car.year}" style="font-weight: bold"/>
+
+            <h:outputText value="Color:"/>
+            <h:outputText value="#{detailView.car.color}" style="font-weight: bold"/>
+        </h:panelGrid>
+    </p:outputPanel>
+</f:view>
+</html>
