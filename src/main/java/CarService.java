@@ -4,6 +4,9 @@
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +18,10 @@ public class CarService {
     private final static String[] colors;
 
     private final static String[] brands;
+
+    @PersistenceContext(unitName="CarUnit")
+    private EntityManager entityManager;
+
 
     static {
         colors = new String[10];
@@ -42,8 +49,13 @@ public class CarService {
         brands[9] = "Ford";
     }
 
+//    public List<Car> getCars() {
+//        return cars;
+//    }
+
     public List<Car> getCars() {
-        return cars;
+        TypedQuery<Car> q = entityManager.createQuery("select c from CarsEntity c", Car.class);
+        return q.getResultList();
     }
 
     private List<Car> cars;
