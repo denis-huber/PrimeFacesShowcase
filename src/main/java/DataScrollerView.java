@@ -2,18 +2,18 @@
  * Created by Denis on 15.12.2016.
  */
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
-@ManagedBean
-@ViewScoped
+@Named
+@RequestScoped
 public class DataScrollerView implements Serializable {
 
 
-    @ManagedProperty("#{carService}")
+    @Inject
     private CarService service;
 
     public List<Car> getCars() {

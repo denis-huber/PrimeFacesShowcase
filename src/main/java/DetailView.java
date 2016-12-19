@@ -1,19 +1,18 @@
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * Created by Denis on 15.12.2016.
  */
-
-@ManagedBean
-@ViewScoped
+@Named
+@RequestScoped
 public class DetailView {
 
     private String id;
     private Car car;
 
-    @ManagedProperty("#{carService}")
+    @Inject
     private CarService service;
 
     public void setService(CarService service) {
@@ -22,7 +21,8 @@ public class DetailView {
 
     public String loadCar() {
         this.car = service.getCar(id);
-        return car.getBrand() + "_" + car.getId();
+        return "";
+//        return car.getBrand() + "_" + car.getId();
     }
 
     public Car getCar() {

@@ -3,15 +3,13 @@
  */
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ManagedBean;
+import javax.ejb.Singleton;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-@ManagedBean(name = "carService")
-@ApplicationScoped
+@Singleton
 public class CarService {
 
     private final static String[] colors;

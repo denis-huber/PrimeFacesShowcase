@@ -1,9 +1,11 @@
 /**
  * Created by Denis on 14.12.2016.
  */
-import javax.faces.bean.ManagedBean;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 
-@ManagedBean
+@Named
+@RequestScoped
 public class EditorView {
 
     private String text;
