@@ -6,13 +6,13 @@ import javax.persistence.Table;
  * Created by Denis on 19.12.2016.
  */
 @Entity
-@Table(name="cars")
+@Table(name="Cars_Table")
 public class CarsEntity {
 
     @Id
     private String id;
     private String brand;
-    private int year;
+//    private int year;
     private String color;
     private int price;
     private boolean soldState;
@@ -25,13 +25,13 @@ public class CarsEntity {
         this.brand = brand;
     }
 
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
+//    public int getYear() {
+//        return year;
+//    }
+//
+//    public void setYear(int year) {
+//        this.year = year;
+//    }
 
     public String getColor() {
         return color;
