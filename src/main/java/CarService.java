@@ -3,14 +3,16 @@
  */
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.Arrays;
 import java.util.List;
 
 @Singleton
+@Startup
 public class CarService {
 
     private final static String[] colors;
@@ -51,7 +53,6 @@ public class CarService {
 
     @PostConstruct
     public void init() {
-        entityManager.createQuery("DELETE FROM Car c").executeUpdate();
         for (int i = 0; i < SIZE; i++) {
             Car c = new Car();
             c.setBrand(getRandomBrand());
@@ -62,6 +63,12 @@ public class CarService {
             entityManager.persist(c);
 
         }
+
+    }
+
+    @PreDestroy
+    public void destroy() {
+        entityManager.createQuery("DELETE FROM Car c").executeUpdate();
     }
 
 
@@ -93,15 +100,5 @@ public class CarService {
         return Arrays.asList(brands);
     }
 
-    public Car getCar(final String searchId) {
-        TypedQuery<Car> q = entityManager.createQuery("select c from Car c where c.id = :searchID", Car.class);
-        q.setParameter("searchID", searchId);
-        return q.getSingleResult();
-    }
-
-    public List<Car> getCars() {
-        TypedQuery<Car> q = entityManager.createQuery("select c from Car c", Car.class);
-        return q.getResultList();
-    }
 
 }

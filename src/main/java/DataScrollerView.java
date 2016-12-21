@@ -2,8 +2,8 @@
  * Created by Denis on 15.12.2016.
  */
 
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
@@ -12,15 +12,12 @@ import java.util.List;
 @RequestScoped
 public class DataScrollerView implements Serializable {
 
-
-    @Inject
-    private CarService service;
+    @EJB
+    private CarEJB carEJB;
 
     public List<Car> getCars() {
-        return service.getCars();
+        return carEJB.getCars();
     }
 
-    public void setService(CarService service) {
-        this.service = service;
-    }
 }
+

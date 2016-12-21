@@ -1,4 +1,4 @@
-import javax.inject.Inject;
+import javax.ejb.EJB;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -13,14 +13,14 @@ import java.util.List;
 @Path("/carressource")
 public class CarRessource {
 
-    @Inject
-    CarService carService;
+    @EJB
+    CarEJB carEJB;
 
     @GET
     @Produces("application/json")
     public JsonArray getClichedMessage() {
         JsonArrayBuilder builder = Json.createArrayBuilder();
-        List<Car> cars = carService.getCars();
+        List<Car> cars = carEJB.getCars();
         cars.forEach(car ->{
             builder.add(Json.createObjectBuilder().add("brand", car.getBrand()).add("year", car.getYear()));
         });
