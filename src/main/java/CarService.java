@@ -7,10 +7,8 @@ import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 @Singleton
 public class CarService {
@@ -19,7 +17,7 @@ public class CarService {
 
     private final static String[] brands;
 
-    @PersistenceContext(unitName="CarUnit")
+    @PersistenceContext(unitName = "CarUnit")
     private EntityManager entityManager;
 
 
@@ -49,30 +47,23 @@ public class CarService {
         brands[9] = "Ford";
     }
 
-//    public List<Car> getCars() {
-//        return cars;
-//    }
-
-    public List<Car> getCars() {
-        TypedQuery<Car> q = entityManager.createQuery("select c from CarsEntity c", Car.class);
-        return q.getResultList();
-    }
-
-    private List<Car> cars;
     private final static int SIZE = 100;
 
     @PostConstruct
     public void init() {
-        List<Car> list = new ArrayList<Car>();
+        entityManager.createQuery("DELETE FROM Car c").executeUpdate();
         for (int i = 0; i < SIZE; i++) {
-            list.add(new Car(getRandomId(), getRandomBrand(), getRandomYear(), getRandomColor(), getRandomPrice(), getRandomSoldState()));
+            Car c = new Car();
+            c.setBrand(getRandomBrand());
+            c.setYear(getRandomYear());
+            c.setColor(getRandomColor());
+            c.setPrice(getRandomPrice());
+            c.setSoldState(getRandomSoldState());
+            entityManager.persist(c);
+
         }
-        this.cars = list;
     }
 
-    private String getRandomId() {
-        return UUID.randomUUID().toString().substring(0, 8);
-    }
 
     private int getRandomYear() {
         return (int) (Math.random() * 50 + 1960);
@@ -103,6 +94,14 @@ public class CarService {
     }
 
     public Car getCar(final String searchId) {
-        return cars.stream().filter(car -> car.getId().equals(searchId)).findAny().orElse(null);
+        TypedQuery<Car> q = entityManager.createQuery("select c from Car c where c.id = :searchID", Car.class);
+        q.setParameter("searchID", searchId);
+        return q.getSingleResult();
     }
+
+    public List<Car> getCars() {
+        TypedQuery<Car> q = entityManager.createQuery("select c from Car c", Car.class);
+        return q.getResultList();
+    }
+
 }

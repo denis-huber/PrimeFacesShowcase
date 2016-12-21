@@ -3,6 +3,6 @@
 
     <persistence-unit name="CarUnit" transaction-type="JTA">
         <jta-data-source>jdbc/_NewPool</jta-data-source>
-        <class>CarsEntity</class>
+        <class>Car</class>
     </persistence-unit>
 </persistence>

@@ -1,12 +1,21 @@
+import org.eclipse.persistence.annotations.UuidGenerator;
+
+import javax.persistence.*;
+
 /**
  * Created by Denis on 15.12.2016.
  */
 
+@Entity
+@Table(name="Cars_Table")
+@UuidGenerator(name="EMP_ID_GEN")
 public class Car {
 
+    @Id
+    @GeneratedValue(generator="EMP_ID_GEN")
     private String id;
     private String brand;
-    private int year;
+    private int year_produced;
     private String color;
     private int price;
     private boolean soldState;
@@ -28,11 +37,11 @@ public class Car {
     }
 
     public int getYear() {
-        return year;
+        return year_produced;
     }
 
     public void setYear(int year) {
-        this.year = year;
+        this.year_produced = year;
     }
 
     public String getColor() {
@@ -59,12 +68,4 @@ public class Car {
         this.soldState = soldState;
     }
 
-    public Car(String id, String brand, int year, String color, int price, boolean soldState) {
-        this.id = id;
-        this.brand = brand;
-        this.year = year;
-        this.color = color;
-        this.price = price;
-        this.soldState = soldState;
-    }
 }
