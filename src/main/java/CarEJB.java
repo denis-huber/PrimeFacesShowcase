@@ -9,6 +9,7 @@ import java.util.List;
  */
 @Stateless
 public class CarEJB {
+
     @PersistenceContext(unitName = "CarUnit")
     private EntityManager entityManager;
 

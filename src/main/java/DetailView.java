@@ -13,7 +13,7 @@ public class DetailView {
     private Car car;
 
     @EJB
-    private CarEJB carEJB;
+    CarEJB carEJB;
 
     public String loadCar() {
         this.car = carEJB.getCar(id);

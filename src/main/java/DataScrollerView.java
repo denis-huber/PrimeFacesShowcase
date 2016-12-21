@@ -13,7 +13,7 @@ import java.util.List;
 public class DataScrollerView implements Serializable {
 
     @EJB
-    private CarEJB carEJB;
+    CarEJB carEJB;
 
     public List<Car> getCars() {
         return carEJB.getCars();
