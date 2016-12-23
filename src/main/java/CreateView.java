@@ -1,7 +1,8 @@
-import org.primefaces.context.RequestContext;
-
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.HashMap;
@@ -11,7 +12,7 @@ import java.util.Map;
  * Created by Denis on 22.12.2016.
  */
 @Named
-@RequestScoped
+@ViewScoped
 public class CreateView {
 
     private String brand;
@@ -92,11 +93,19 @@ public class CreateView {
     public void updateCar() {
         carEJB.createCar(brand,year_produced,color,price,soldState);
         hitCounter.increment();
-        RequestContext.getCurrentInstance().execute("alert('Vielen Dank')");
     }
 
     public int getHits() {
         return hitCounter.getHits();
+    }
+
+    public void buttonAction(ActionEvent actionEvent) {
+        addMessage("Vielen Dank!!");
+    }
+
+    public void addMessage(String summary) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 }
 
