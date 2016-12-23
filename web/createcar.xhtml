@@ -35,7 +35,7 @@
             <p:inputMask id="soldState" value="#{createView.soldState}" mask="" required="true"/>
 
             <p:commandButton value="Reset" type="reset"/>
-            <p:commandButton value="Submit" id="submit" actionListener="#{createView.updateCar()}" ajax="false">
+            <p:commandButton value="Submit" id="submit" actionListener="#{createView.updateCar()}" ajax="false" faces-redirect="true">
                 <f:actionListener binding="#{createView.buttonAction(event)}"/>
             </p:commandButton>
         </h:panelGrid>
