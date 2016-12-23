@@ -16,7 +16,6 @@ import java.util.List;
 public class CarService {
 
     private final static String[] colors;
-
     private final static String[] brands;
 
     @PersistenceContext(unitName = "CarUnit")
@@ -71,7 +70,6 @@ public class CarService {
         entityManager.createQuery("DELETE FROM Car c").executeUpdate();
     }
 
-
     private int getRandomYear() {
         return (int) (Math.random() * 50 + 1960);
     }
@@ -99,6 +97,5 @@ public class CarService {
     public List<String> getBrands() {
         return Arrays.asList(brands);
     }
-
 
 }

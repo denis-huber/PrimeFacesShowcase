@@ -20,6 +20,15 @@ public class Car {
     private int price;
     private boolean soldState;
 
+    public Car() {}
+
+    public Car(String brand, int year, String color, int price, boolean soldState) {
+        this.brand = brand;
+        this.year_produced =year;
+        this.color = color;
+        this.price = price;
+        this.soldState = soldState;
+    }
     public String getId() {
         return id;
     }

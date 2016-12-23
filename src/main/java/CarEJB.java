@@ -24,4 +24,9 @@ public class CarEJB {
         return q.getResultList();
     }
 
+    public void createCar(String brand, int year, String color, int price, boolean soldState) {
+        Car car = new Car(brand,year,color,price,soldState);
+        entityManager.persist(car);
+    }
+
 }
